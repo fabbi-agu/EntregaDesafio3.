@@ -1,0 +1,36 @@
+<div *ngIf="seVe" class="advertencia">
+    <p>Para generar un número de trámite, complete todos los datos solicitados.</p>
+</div>
+<div id="formulario">
+    <h2>Formulario de Datos Personales</h2>
+    <form [formGroup]="useForm" id="datosPersonalesForm" (ngSubmit)="generarResultado()" >
+        <label for="nombre">Nombre:</label>
+        <input formControlName="nombre" type="text" id="nombre" name="nombre" required>
+
+        <label for="apellido">Apellido:</label>
+        <input formControlName="apellido" type="text" id="apellido" name="apellido" required>
+
+        <label for="edad">Edad:</label>
+        <input formControlName="edad" type="number" id="edad" name="edad" required>
+
+        <label for="mail">Correo Electronico:</label>
+        <input formControlName="mail" type="text" id="mail" name="mail" required>
+
+        <label for="nacionalidad">Nacionalidad:</label>
+        <input formControlName="nacionalidad"  type="text" id="nacionalidad" name="nacionalidad" required>
+
+        <button 
+        [disabled]="useForm.invalid"
+        type="button" (click)="generarResultado()" >Generar Nro de Tramite</button>
+    </form> 
+    <div *ngIf="!seVe" class="aviso">
+        <p>Su número de trámite es el siguiente:</p>
+        <span>{{numTramite}}</span>
+    </div>
+</div>
+<div *ngIf="!seVe">
+    <ul>
+        <li *ngFor="let usuario of personas">{{ usuario.nombre }} {{ usuario.apellido }} {{ usuario.mail }} {{ usuario.nroTramite }}</li>
+    </ul>
+</div>
+
